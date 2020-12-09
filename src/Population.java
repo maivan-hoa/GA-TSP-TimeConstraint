@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -13,9 +14,14 @@ public class Population {
 
     public void init(){
         for(int i=0; i< sizePopulation; i++){
-            Individual ind = new Individual();
-            ind.initGene();
-            ind.setFitness();
+            ArrayList<Integer> gene = new ArrayList<>();
+            for(int j=1; j<Main.numCity; j++){
+                gene.add(j);
+            }
+            Collections.shuffle(gene);
+            gene.add(0, 0);
+            Individual ind = new Individual(gene);
+            //ind.setFitness();
             individuals.add(ind);
         }
     }

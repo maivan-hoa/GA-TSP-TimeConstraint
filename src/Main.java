@@ -23,9 +23,11 @@ public class Main {
         for(int i=1;i<10;i++){
             a.add(i);
         }
-        Collections.shuffle(a);
-        a.add(0,0);
+
+        ArrayList<Integer> b = new ArrayList<>(a);
+        b.set(0, 1);
         System.out.println(a);
+        System.out.println(b==a);
 
     }
 

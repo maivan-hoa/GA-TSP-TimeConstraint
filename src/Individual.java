@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class Individual {
@@ -7,13 +8,19 @@ public class Individual {
     ArrayList<Integer> gene = new ArrayList<>();
     double fitness;
 
-    public void initGene(){
-        for(int i=1; i<Main.numCity; i++){
-            gene.add(i);
-        }
-        Collections.shuffle(gene);
-        gene.add(0, 0);
+    Individual(ArrayList<Integer> gene){
+        this.gene = gene;
+        setFitness();
     }
+
+//    public void initGene(){
+//        for(int i=1; i<Main.numCity; i++){
+//            gene.add(i);
+//        }
+//        Collections.shuffle(gene);
+//        gene.add(0, 0);
+//        setFitness();
+//    }
 
     public void setFitness(){
         fitness = 0.0;
