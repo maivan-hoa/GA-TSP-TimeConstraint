@@ -8,6 +8,7 @@ public class GA {
     double pOfMutation; // ngưỡng xác suất để lai ghép hoặc đột biến
     int ITERATIONs;
     Individual bestSolution;
+    int timeReset = 50;
 
     public GA(int sizePopulation, int iterations, double pOfMutation){
         population = new Population(sizePopulation);
@@ -17,6 +18,8 @@ public class GA {
 
     public void run(int nN){ //nN số lần thực hiện lai ghép và đột biến
         population.init();
+        bestSolution = population.getIndividuals().get(0); //lấy ngẫu nhiên một cá thể coi như tốt nhất
+        int changeBest = 0; // Nếu sau timeReset thế hệ mà bestSolution không đổi thì khởi tạo lại quần thể
 
         for(int iter = 0; iter<ITERATIONs; iter++){
             List<Individual> individuals = population.getIndividuals();
@@ -42,7 +45,19 @@ public class GA {
                 }
 
                 population.add(children);
-                selection(); // thực hiện chọn lọc
+
+                Individual bestInter;
+                bestInter = selection(); // thực hiện chọn lọc
+                if(bestInter.getFitness() < bestSolution.getFitness()){
+                    bestSolution = bestInter;
+                    changeBest = 0;
+                }
+
+                changeBest++;
+                if(changeBest > timeReset){
+                    population.init();
+                    changeBest = 0;
+                }
             }
 
             System.out.println("Thế hệ: " + (iter+1));
@@ -109,14 +124,12 @@ public class GA {
         return ind;
     }
 
-    void selection(){
+    Individual selection(){
         population.getIndividuals().sort((i1, i2) -> {
            Double di1 = i1.getFitness();
            Double di2 = i2.getFitness();
            return di1.compareTo(di2);
         });
-
-        bestSolution = population.getIndividuals().get(0);
 
         ArrayList<Individual> newIndividuals = new ArrayList<>();
         for(int i=0; i<population.sizePopulation; i++){
@@ -124,6 +137,8 @@ public class GA {
         }
 
         population.setIndividuals(newIndividuals);
+
+        return population.getIndividuals().get(0);
     }
 
     boolean checkIndividualValid(ArrayList<Integer> a){

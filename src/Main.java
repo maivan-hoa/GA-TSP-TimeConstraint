@@ -21,7 +21,7 @@ public class Main {
         readData(filename);
 
         int sizePopulation = 100;
-        int ITERATIONs = 100; //số thế hệ
+        int ITERATIONs = 1000; //số thế hệ
         int nN = 50;
         double pOfMutation= 0.3;
 

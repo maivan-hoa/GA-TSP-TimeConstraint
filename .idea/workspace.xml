@@ -3,12 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="179d67c3-6ab8-4463-88c9-3def4b004d8d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GA-TSP-TimeConstraint/Individual.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GA-TSP-TimeConstraint/Individual.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GA-TSP-TimeConstraint/Population.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GA-TSP-TimeConstraint/Population.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Individual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Individual.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Population.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Population.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
