@@ -1,3 +1,5 @@
+import com.sun.javaws.IconUtil;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -6,10 +8,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
-    //static int sizePopulation;
+
     static Double[][] graph;
-    static Population population;
-    static int numOfInd;
     static Double[][] timeConstrain;
     static int numCity;
     static Random rand;
@@ -19,21 +19,21 @@ public class Main {
         rand = new Random(seed);
         String filename = "rc_201.1.txt";
         readData(filename);
-        ArrayList<Integer> a = new ArrayList<>();
-        for(int i=1;i<10;i++){
-            a.add(i);
-        }
 
-        ArrayList<Integer> b = new ArrayList<>(a);
-        b.set(0, 1);
-        System.out.println(a);
-        System.out.println(b==a);
+        int sizePopulation = 100;
+        int ITERATIONs = 100; //số thế hệ
+        int nN = 50;
+        double pOfMutation= 0.3;
+
+        GA ga = new GA(sizePopulation, ITERATIONs, pOfMutation);
+        ga.run(nN);
 
     }
 
     public static void readData(String filename) throws FileNotFoundException {
         File file = new File("D:\\20201\\Evolutionary Computing\\SolomonPotvinBengio\\"+ filename);
         Scanner input = new Scanner(file);
+
         numCity = Integer.parseInt(input.nextLine());
 
         graph = new Double[numCity][numCity];
@@ -55,4 +55,6 @@ public class Main {
             timeConstrain[i][1] = Double.parseDouble(time[1]);
         }
     }
+
+
 }

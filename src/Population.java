@@ -13,6 +13,7 @@ public class Population {
     }
 
     public void init(){
+
         for(int i=0; i< sizePopulation; i++){
             ArrayList<Integer> gene = new ArrayList<>();
             for(int j=1; j<Main.numCity; j++){
@@ -21,13 +22,16 @@ public class Population {
             Collections.shuffle(gene);
             gene.add(0, 0);
             Individual ind = new Individual(gene);
-            //ind.setFitness();
             individuals.add(ind);
         }
     }
 
     public ArrayList<Individual> getIndividuals(){
         return individuals;
+    }
+
+    void setIndividuals(ArrayList<Individual> individuals){
+        this.individuals = individuals;
     }
 
     void add(List<Individual> offsprings){  //thêm các cá thể con mới tạo ra vào quần thể

@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Individual {
     Random rd = Main.rand;
-    ArrayList<Integer> gene = new ArrayList<>();
+    ArrayList<Integer> gene;
     double fitness;
 
     Individual(ArrayList<Integer> gene){
@@ -13,14 +13,6 @@ public class Individual {
         setFitness();
     }
 
-//    public void initGene(){
-//        for(int i=1; i<Main.numCity; i++){
-//            gene.add(i);
-//        }
-//        Collections.shuffle(gene);
-//        gene.add(0, 0);
-//        setFitness();
-//    }
 
     public void setFitness(){
         fitness = 0.0;
@@ -29,6 +21,10 @@ public class Individual {
         }
 
         fitness += Main.graph[gene.get(Main.numCity-1)][0];
+    }
+
+    public double getFitness(){
+        return fitness;
     }
 
     public ArrayList<Integer> getGene(){
