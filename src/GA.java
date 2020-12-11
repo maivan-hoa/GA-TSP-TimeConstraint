@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -18,7 +19,8 @@ public class GA {
 
     public void run(int nN){ //nN số lần thực hiện lai ghép và đột biến
         population.init();
-        bestSolution = population.getBestIndividual(); //lấy ngẫu nhiên một cá thể coi như tốt nhất
+        //bestSolution = population.getBestIndividual(); //lấy ngẫu nhiên một cá thể coi như tốt nhất
+        bestSolution = population.getIndividuals().get(0);
         int changeBest = 0; // Nếu sau timeReset thế hệ mà bestSolution không đổi thì khởi tạo lại quần thể
 
         for(int iter = 0; iter<ITERATIONs; iter++){
@@ -69,17 +71,40 @@ public class GA {
 
     ArrayList<Individual> crossOver(Individual a, Individual b){
         ArrayList<Individual> children = new ArrayList<>();
-
-        int t = rd.nextInt(a.getGene().size()-1);
-
         ArrayList<Integer> ca = new ArrayList<>();
         ArrayList<Integer> cb = new ArrayList<>();
+        //chọn một điểm cắt trên gen
+        /*
+        int t = rd.nextInt(a.getGene().size()-1);
         for(int i=0; i<t; i++){
             ca.add(a.getGene().get(i));
             cb.add(b.getGene().get(i));
         }
 
         for(int i=t; i<a.getGene().size(); i++){
+            ca.add(b.getGene().get(i));
+            cb.add(a.getGene().get(i));
+        }
+        */
+
+        // chọn hai điểm cắt
+        int m1, m2;
+        do{
+            m1 = rd.nextInt(a.getGene().size());
+            m2 = rd.nextInt(a.getGene().size());
+        }while (m1>m2 || m1==m2);
+
+        for(int i=0; i<m1; i++){
+            ca.add(b.getGene().get(i));
+            cb.add(a.getGene().get(i));
+        }
+
+        for(int i=m1; i<=m2; i++){
+            ca.add(a.getGene().get(i));
+            cb.add(b.getGene().get(i));
+        }
+
+        for(int i=m2+1; i<a.getGene().size(); i++){
             ca.add(b.getGene().get(i));
             cb.add(a.getGene().get(i));
         }
@@ -132,9 +157,9 @@ public class GA {
 
         ArrayList<Individual> newIndividuals = new ArrayList<>();
         int l = population.getIndividuals().size()-1;
-        for(int i=0; i<population.sizePopulation/2; i++){
+        for(int i=0; i<population.sizePopulation; i++){
             newIndividuals.add(population.getIndividuals().get(i));
-            newIndividuals.add(population.getIndividuals().get(l-i));
+            //newIndividuals.add(population.getIndividuals().get(l-i));
         }
 
         population.setIndividuals(newIndividuals);
@@ -173,6 +198,7 @@ public class GA {
             }
         }
 
+        Collections.shuffle(check);
         for(int i=0; i<a.size(); i++){
             for(int j=0; j<i; j++){
                 if(a.get(i) == a.get(j)){

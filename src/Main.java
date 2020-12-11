@@ -13,13 +13,13 @@ public class Main {
     static int numCity;
 
     public static void main(String[] args) throws FileNotFoundException {
-        String filename = "rc_203.1.txt";
+        String filename = "rc_201.3.txt";
         readData(filename);
 
         int sizePopulation = 10*Main.numCity;
         int ITERATIONs = 1000; //số thế hệ
-        int nN = 100;
-        double pOfMutation= 0.5;
+        int nN = 100; //số lần lai ghép đột biến
+        double pOfMutation= 0.5; //xác suất lai ghép
 
         GA ga = new GA(sizePopulation, ITERATIONs, pOfMutation);
         ga.run(nN);

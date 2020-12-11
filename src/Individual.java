@@ -31,15 +31,24 @@ public class Individual {
             sumTime += Main.graph[gene.get(i-1)][gene.get(i)];
 
             if(sumTime < Main.timeConstraint[gene.get(i)][0]){
-                sumTime = fitness = Main.timeConstraint[gene.get(i)][0];
+                double t = Main.timeConstraint[gene.get(i)][0] - sumTime;
+                sumTime += t;
+                fitness += t;
             }
 
             if(sumTime > Main.timeConstraint[gene.get(i)][1]){
-                fitness += Math.pow(fitness-Main.timeConstraint[gene.get(i)][1], 2);
+                fitness += Math.pow(sumTime-Main.timeConstraint[gene.get(i)][1], 2);
             }
         }
 
+        // tính toán khi quay về 0
         fitness += Main.graph[gene.get(Main.numCity-1)][0];
+        sumTime += Main.graph[gene.get(Main.numCity-1)][0];
+
+        if(sumTime > Main.timeConstraint[gene.get(0)][1]){
+            fitness += Math.pow(sumTime-Main.timeConstraint[gene.get(0)][1], 2);
+        }
+
     }
 
     public double getFitness(){
