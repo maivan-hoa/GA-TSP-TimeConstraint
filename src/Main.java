@@ -8,26 +8,21 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
-
     static Double[][] graph;
-    static Double[][] timeConstrain;
+    static Double[][] timeConstraint;
     static int numCity;
-    static Random rand;
 
     public static void main(String[] args) throws FileNotFoundException {
-        int seed = 1;
-        rand = new Random(seed);
-        String filename = "rc_201.1.txt";
+        String filename = "rc_203.1.txt";
         readData(filename);
 
-        int sizePopulation = 100;
+        int sizePopulation = 10*Main.numCity;
         int ITERATIONs = 1000; //số thế hệ
-        int nN = 50;
-        double pOfMutation= 0.3;
+        int nN = 100;
+        double pOfMutation= 0.5;
 
         GA ga = new GA(sizePopulation, ITERATIONs, pOfMutation);
         ga.run(nN);
-
     }
 
     public static void readData(String filename) throws FileNotFoundException {
@@ -46,13 +41,13 @@ public class Main {
             }
         }
 
-        timeConstrain = new Double[numCity][2];
+        timeConstraint = new Double[numCity][2];
         for(int i=0; i<numCity; i++){
             str = input.nextLine();
             str = str.replaceAll(" +", " ");
             String[] time = str.split(" ");
-            timeConstrain[i][0] = Double.parseDouble(time[0]);
-            timeConstrain[i][1] = Double.parseDouble(time[1]);
+            timeConstraint[i][0] = Double.parseDouble(time[0]);
+            timeConstraint[i][1] = Double.parseDouble(time[1]);
         }
     }
 

@@ -5,7 +5,6 @@ import java.util.Random;
 
 public class Population {
     int sizePopulation; // so luong ca the trong quan the
-    Random rand = Main.rand;
     ArrayList<Individual> individuals = new ArrayList<>(); // lưu các cá thể trong quần thể
 
     Population(int n){
@@ -36,5 +35,15 @@ public class Population {
 
     void add(List<Individual> offsprings){  //thêm các cá thể con mới tạo ra vào quần thể
         individuals.addAll(offsprings);
+    }
+
+    Individual getBestIndividual(){
+        individuals.sort((i1, i2) -> {
+            Double di1 = i1.getFitness();
+            Double di2 = i2.getFitness();
+            return di1.compareTo(di2);
+        });
+
+        return individuals.get(0);
     }
 }

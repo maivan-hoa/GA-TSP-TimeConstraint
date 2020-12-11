@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Random;
 
 public class GA {
-    Random rd = Main.rand;
+    Random rd = new Random();
     Population population;
     double pOfMutation; // ngưỡng xác suất để lai ghép hoặc đột biến
     int ITERATIONs;
@@ -18,7 +18,7 @@ public class GA {
 
     public void run(int nN){ //nN số lần thực hiện lai ghép và đột biến
         population.init();
-        bestSolution = population.getIndividuals().get(0); //lấy ngẫu nhiên một cá thể coi như tốt nhất
+        bestSolution = population.getBestIndividual(); //lấy ngẫu nhiên một cá thể coi như tốt nhất
         int changeBest = 0; // Nếu sau timeReset thế hệ mà bestSolution không đổi thì khởi tạo lại quần thể
 
         for(int iter = 0; iter<ITERATIONs; iter++){
@@ -43,21 +43,20 @@ public class GA {
                     children.add(ia);
                     children.add(ib);
                 }
+            }
 
-                population.add(children);
+            population.add(children);
+            Individual bestInter = selection(); // thực hiện chọn lọc
 
-                Individual bestInter;
-                bestInter = selection(); // thực hiện chọn lọc
-                if(bestInter.getFitness() < bestSolution.getFitness()){
-                    bestSolution = bestInter;
-                    changeBest = 0;
-                }
+            if(bestInter.getFitness() < bestSolution.getFitness()){
+                bestSolution = bestInter;
+                changeBest = 0;
+            }
 
-                changeBest++;
-                if(changeBest > timeReset){
-                    population.init();
-                    changeBest = 0;
-                }
+            changeBest++;
+            if(changeBest > timeReset){
+                population.init();
+                changeBest = 0;
             }
 
             System.out.println("Thế hệ: " + (iter+1));
@@ -132,8 +131,10 @@ public class GA {
         });
 
         ArrayList<Individual> newIndividuals = new ArrayList<>();
-        for(int i=0; i<population.sizePopulation; i++){
+        int l = population.getIndividuals().size()-1;
+        for(int i=0; i<population.sizePopulation/2; i++){
             newIndividuals.add(population.getIndividuals().get(i));
+            newIndividuals.add(population.getIndividuals().get(l-i));
         }
 
         population.setIndividuals(newIndividuals);
