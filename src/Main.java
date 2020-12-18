@@ -11,15 +11,19 @@ public class Main {
     static Double[][] graph;
     static Double[][] timeConstraint;
     static int numCity;
+    static int sizePopulation;
+    static int ITERATIONs;
+    static double pOfMutation;
+    static int nN;
 
     public static void main(String[] args) throws FileNotFoundException {
-        String filename = "rc_201.3.txt";
+        String filename = "rc_204.1.txt";
         readData(filename);
 
-        int sizePopulation = 10*Main.numCity;
-        int ITERATIONs = 1000; //số thế hệ
-        int nN = 100; //số lần lai ghép đột biến
-        double pOfMutation= 0.5; //xác suất lai ghép
+        sizePopulation = 2000;
+        ITERATIONs = 2000;  //số thế hệ
+        nN = 2000;          //số lần lai ghép đột biến
+        pOfMutation= 0.5;   //xác suất lai ghép
 
         GA ga = new GA(sizePopulation, ITERATIONs, pOfMutation);
         ga.run(nN);
@@ -51,5 +55,23 @@ public class Main {
         }
     }
 
+    public static int checkGenValid(ArrayList<Integer> gen){ // kiểm tra gen kết quả có hợp lệ với ràng buộc thời gian
+        double sumTime = 0.0;
+        for(int i=1; i<numCity; i++){
+            sumTime += graph[gen.get(i-1)][gen.get(i)];
+            if(sumTime < timeConstraint[gen.get(i)][0]){
+                sumTime = timeConstraint[gen.get(i)][0];
+            }
+            if(sumTime > timeConstraint[gen.get(i)][1]){
+                return 0;
+            }
+        }
+
+        sumTime += graph[gen.get(numCity-1)][0];
+        if(sumTime > timeConstraint[0][1]){
+            return 0;
+        }
+        return 1;
+    }
 
 }

@@ -6,9 +6,11 @@
       <change beforePath="$PROJECT_DIR$/out/production/GA-TSP-TimeConstraint/GA.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GA-TSP-TimeConstraint/GA.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GA-TSP-TimeConstraint/Individual.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GA-TSP-TimeConstraint/Individual.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GA-TSP-TimeConstraint/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GA-TSP-TimeConstraint/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GA-TSP-TimeConstraint/Population.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GA-TSP-TimeConstraint/Population.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GA.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Individual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Individual.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Population.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Population.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,6 +25,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">

@@ -37,7 +37,7 @@ public class Individual {
             }
 
             if(sumTime > Main.timeConstraint[gene.get(i)][1]){
-                fitness += Math.pow(sumTime-Main.timeConstraint[gene.get(i)][1], 2);
+                fitness += 2*Math.pow(sumTime-Main.timeConstraint[gene.get(i)][1], 2);
             }
         }
 
@@ -45,8 +45,8 @@ public class Individual {
         fitness += Main.graph[gene.get(Main.numCity-1)][0];
         sumTime += Main.graph[gene.get(Main.numCity-1)][0];
 
-        if(sumTime > Main.timeConstraint[gene.get(0)][1]){
-            fitness += Math.pow(sumTime-Main.timeConstraint[gene.get(0)][1], 2);
+        if(sumTime > Main.timeConstraint[0][1]){
+            fitness += Math.pow(sumTime-Main.timeConstraint[0][1], 2);
         }
 
     }

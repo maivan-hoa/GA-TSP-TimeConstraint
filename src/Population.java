@@ -38,12 +38,13 @@ public class Population {
     }
 
     Individual getBestIndividual(){
-        individuals.sort((i1, i2) -> {
+        ArrayList<Individual> individualsort = new ArrayList<>(individuals);
+        individualsort.sort((i1, i2) -> {
             Double di1 = i1.getFitness();
             Double di2 = i2.getFitness();
             return di1.compareTo(di2);
         });
 
-        return individuals.get(0);
+        return individualsort.get(0);
     }
 }
