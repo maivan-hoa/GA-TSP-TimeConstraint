@@ -10,7 +10,7 @@ public class GA {
     double pOfMutation; // ngưỡng xác suất để lai ghép hoặc đột biến
     int ITERATIONs;
     Individual bestSolution;
-    int timeReset = 100;
+    int timeReset = 300;
 
     public GA(int sizePopulation, int iterations, double pOfMutation){
         population = new Population(sizePopulation);
@@ -26,7 +26,7 @@ public class GA {
 
         for(int iter = 0; iter<ITERATIONs; iter++){
             List<Individual> individuals = population.getIndividuals();
-            List<Individual> children = new ArrayList<>();
+            ArrayList<Individual> children = new ArrayList<>();
 
             for(int i=0; i<nN; i++){
                 Individual a = individuals.get(rd.nextInt(individuals.size()));
@@ -48,10 +48,13 @@ public class GA {
                 }
             }
 
+            // nếu muốn thực hiện hàm selection3() thì phải tách riêng các cá thể con mới tạo ra
+            //Individual bestInter = selection3(children);
+
             population.add(children);
             Individual bestInter = selection(); // thực hiện chọn lọc
 
-            if(bestInter.getFitness() <= bestSolution.getFitness()){
+            if(bestInter.getFitness() < bestSolution.getFitness()){
                 bestSolution = bestInter;
                 changeBest = 0;
             }
@@ -142,7 +145,7 @@ public class GA {
         do{
             t2 = rd.nextInt(a.getGene().size());
         }
-        while(t2 ==0 || t2 == t1);
+        while(t2==0 || t2==t1);
 
         ArrayList<Integer> ca = new ArrayList<>(a.getGene());
         ca.set(t1, a.getGene().get(t2));
@@ -177,7 +180,7 @@ public class GA {
     }
 
     // Selection -------------------------------------------------------------------------------------------------------
-    Individual selection(){ // chọn 50% tốt nhất và 50% tồi nhất trong quần thể có cả parent + children
+    Individual selection(){ // chọn 80% tốt nhất và 20% tồi nhất trong quần thể có cả parent + children
         population.getIndividuals().sort((i1, i2) -> {
            Double di1 = i1.getFitness();
            Double di2 = i2.getFitness();
@@ -185,7 +188,7 @@ public class GA {
         });
 
         ArrayList<Individual> newIndividuals = new ArrayList<>();
-        int m = (int)(0.9*Main.sizePopulation);
+        int m = (int)(0.7*Main.sizePopulation);
 
         int l = population.getIndividuals().size()-1;
         for(int i=0; i<m; i++){
@@ -235,6 +238,40 @@ public class GA {
         return bestInd;
     }
 
+    Individual selection3(ArrayList<Individual> children){
+        // lựa chọn 50% cá thể cũ tốt nhất và 50% cá thể mới tốt nhất
+        ArrayList<Individual> newIndividuals = new ArrayList<>();
+        Individual bestInd = population.getBestIndividual();
+
+        population.getIndividuals().sort((i1, i2) -> {
+            Double di1 = i1.getFitness();
+            Double di2 = i2.getFitness();
+            return di1.compareTo(di2);
+        });
+
+        bestInd = population.getIndividuals().get(0);
+        int m = (int)(0.2*Main.sizePopulation);
+        for(int i=0; i<m; i++){
+            newIndividuals.add(population.getIndividuals().get(i));
+        }
+
+        population.setIndividuals(children);
+        population.getIndividuals().sort((i1, i2) -> {
+            Double di1 = i1.getFitness();
+            Double di2 = i2.getFitness();
+            return di1.compareTo(di2);
+        });
+        for(int i=0; i<Main.sizePopulation-m; i++){
+            newIndividuals.add(population.getIndividuals().get(i));
+        }
+
+        if(bestInd.getFitness() >= population.getIndividuals().get(0).getFitness()){
+            bestInd = population.getIndividuals().get(0);
+        }
+
+        population.setIndividuals(newIndividuals);
+        return bestInd;
+    }
 
     // Check and Make individual valid ---------------------------------------------------------------------------------
     boolean checkIndividualValid(ArrayList<Integer> a){ // kiểm tra gen có trùng lặp node (chưa cần ràng buộc thời gian)
